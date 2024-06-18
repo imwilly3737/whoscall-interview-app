@@ -2,8 +2,9 @@ FROM python:3.11
 
 WORKDIR .
 
-RUN pip install -r ./requirement.txt
+ADD . .
+RUN pip install -r ./requirements.txt
 
-EXPOSE 3000
+EXPOSE 5000
 
-ENTRYPOINT ["./api/start.py"]
+ENTRYPOINT ["python", "./api/app.py"]
