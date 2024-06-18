@@ -1,0 +1,9 @@
+services:
+  whoscall-app:
+    build: .
+    ports:
+      - "5000:5000"
+    container_name: whoscall-app
+    volumes:
+      - ./api:/api
+      - ./tasks:/tasks
