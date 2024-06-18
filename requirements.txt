@@ -1,2 +1,6 @@
 gunicorn==22.0.0
-Flask==2.3.3
+Flask==2.0.3
+Flask-JWT-Extended==4.6.0
+
+# dependecies
+Werkzeug==2.2.2  # For Flask 2.0.3

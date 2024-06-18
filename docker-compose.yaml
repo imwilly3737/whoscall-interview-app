@@ -5,6 +5,9 @@ services:
       - "5000:5000"
     image: whoscall-app
     container_name: whoscall-app
+    env_file:
+      - ".env"
     volumes:
       - ./api:/api
-      - ./tasks:/tasks
+      - ./app:/app
+      - ./model:/model
