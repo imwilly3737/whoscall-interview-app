@@ -78,7 +78,7 @@ class Tasks:
     def update(self, t_id: int, fields: dict) -> dict:
         fields = {k: v for k, v in fields.items() if k in self.VALID_FIELDS}
         if t_id != fields.get('id', t_id):
-            raise KeyError
+            raise ValueError
         if not _r.sismember(SET_KEY, str(t_id)):
             raise KeyError
         self.storage_update(t_id, fields)
