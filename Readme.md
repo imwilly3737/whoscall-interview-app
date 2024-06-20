@@ -16,11 +16,13 @@
 3. Wait and see `Building ... FINISHED`
 
 # How to run unit test
-1. Make sure that you already build this app
-2. Run `docker-compose run whoscall-app pytest unit_tests`
-3. You will see the result of pytest. E.g. `8 passes in 0.14s`
+1. Build testing docker image. `docker compose -f .\docker-compose-test.yaml build whoscall-app-test`
+2. Run testing docker containers. `docker compose -f .\docker-compose-test.yaml up`
+3. Run `docker exec whoscall-app-test pytest unit_tests`
+4. You will see the result of pytest. E.g. `8 passes in 0.14s`
 
 # How to run end-to-end(E2E) test
-1. Make sure that you already run this app
-2. Before sending any additional requests, run `docker exec whoscall-app python ./e2e_tests/e2e_tests_for_task_api.py`
-3. You will see the result of end-to-end test. E.g. `Success!! ...`
+1. Build testing docker image. `docker compose -f .\docker-compose-test.yaml build whoscall-app-test`
+2. Run testing docker containers. `docker compose -f .\docker-compose-test.yaml up`
+3. Before sending any additional requests, run `docker exec whoscall-app-test python ./e2e_tests/e2e_tests_for_task_api.py`
+4. You will see the result of end-to-end test. E.g. `Success!! ...`

@@ -38,7 +38,8 @@ def e2e_test_auth_and_crud():
         "Authorization": f"Bearer {jwt_token}",
     })
     assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'result': []}
+    result = response.json()
+    assert result == {'result': []}
     logger.info('Check Authorized result: Success')
 
     # Check Task creation
@@ -62,7 +63,8 @@ def e2e_test_auth_and_crud():
         "Authorization": f"Bearer {jwt_token}",
     })
     assert response.status_code == HTTPStatus.OK
-    check_query_result(response.json()["result"], {
+    result = response.json()["result"]
+    check_query_result(result, {
         tid: {
             "id": tid,
             "name": "買晚餐",
@@ -103,6 +105,10 @@ def e2e_test_auth_and_crud():
 
     logger.info('Success!! All Checks are completed without problems.')
 
+    Tasks.clear_all()
+
 
 if __name__ == "__main__":
+    if getenv("TEST") is None:
+        raise Exception("Do not run this on NON-TESTING mode")
     e2e_test_auth_and_crud()

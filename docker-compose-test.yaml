@@ -1,0 +1,21 @@
+services:
+  whoscall-app-test:
+    build: .
+    ports:
+      - "5000:5000"
+    image: whoscall-app-test
+    container_name: whoscall-app-test
+    environment:
+      - TEST=1
+    env_file:
+      - ".env"
+    volumes:
+      - ./app:/app
+      - ./e2e_tests:/e2e_tests
+      - ./model:/model
+      - ./routes:/routes
+      - ./unit_tests:/unit_tests
+  redis:
+    image: redis
+    restart: always
+    container_name: redis

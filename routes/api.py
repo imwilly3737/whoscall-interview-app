@@ -51,7 +51,8 @@ def update_task(t_id: int):
         data = request.get_json()
         return jsonify(result=task_records.update(t_id, data))
     except KeyError:
-        return jsonify(error="id does not exist"), HTTPStatus.NOT_FOUND
+        return (jsonify(error="id does not exist or id is inconsistent between url parameter and payload"),
+                HTTPStatus.NOT_FOUND)
     except Exception as ex:
         logger.exception("Exception when updating task: %r", ex)
         return jsonify(error=app.config["GENERAL_SERVER_ERROR"]), HTTPStatus.INTERNAL_SERVER_ERROR
