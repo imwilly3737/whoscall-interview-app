@@ -6,7 +6,7 @@ class User:
     def __init__(self):
         self._storage = {
             "whoscall": {
-                "username": "whoscall",
+                "username": getenv("USER_NAME", default="whoscall"),
                 "password": getenv("USER_PASSWORD"),
             }
         }

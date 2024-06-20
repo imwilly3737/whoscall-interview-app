@@ -7,4 +7,4 @@ COPY . /service/.
 ENV PYTHONPATH="${PYTHONPATH}:/service"
 EXPOSE 5000
 
-CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "app.app:app", "--reload"]
+CMD ["gunicorn", "app.app:app"]

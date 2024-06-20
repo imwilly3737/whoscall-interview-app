@@ -4,7 +4,8 @@ import logging
 from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
-from app.app import app, json_response
+from app.app import app
+from app.utils import json_response
 from model.tasks import task_records
 
 
