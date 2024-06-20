@@ -1,9 +1,11 @@
+import copy
+
 import pytest
 
 from model.tasks import Tasks
 
 
-def check_query_result(result, expect_result):
+def check_query_result(result: list, expect_result: dict):
     assert len(expect_result) == len(result)
     for _r in result:
         assert expect_result[_r["id"]] == _r
@@ -14,23 +16,29 @@ def prepare_empty_task():
     return Tasks()
 
 
+_ONE_TASK_STORAGE = {
+    1: {
+        "id": 1,
+        "name": "task1",
+        "status": Tasks.Status.INCOMPLETE
+    }
+}
+
+
 @pytest.fixture()
 def prepare_one_task():
     _tasks = Tasks()
-    _tasks._storage = {
-        1: {
-            "id": 1,
-            "name": "task1",
-            "status": Tasks.Status.INCOMPLETE
-        }
-    }
+    _tasks._storage = copy.deepcopy(_ONE_TASK_STORAGE)
     _tasks._auto_increment = 2
     return _tasks
 
 
 def test_empty_query(prepare_empty_task):
-    _tasks = prepare_empty_task
-    assert _tasks.query() == []
+    assert prepare_empty_task.query() == []
+
+
+def test_one_task_query(prepare_one_task):
+    check_query_result(prepare_one_task.query(), _ONE_TASK_STORAGE)
 
 
 @pytest.mark.parametrize("new_task_name,add_expected,query_expected", [
