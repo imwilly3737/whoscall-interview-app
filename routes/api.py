@@ -37,7 +37,7 @@ def add_task():
         data = request.get_json()
         if "name" not in data:
             return jsonify(error="name field is not provided"), HTTPStatus.BAD_REQUEST
-        return jsonify(result=task_records.add()), HTTPStatus.CREATED
+        return jsonify(result=task_records.add(name=data["name"])), HTTPStatus.CREATED
     except Exception as ex:
         logger.exception("Exception when adding task: %r", ex)
         return jsonify(error=app.config["GENERAL_SERVER_ERROR"]), HTTPStatus.INTERNAL_SERVER_ERROR
