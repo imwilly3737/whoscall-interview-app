@@ -13,3 +13,7 @@ services:
       - ./model:/model
       - ./routes:/routes
       - ./unit_tests:/unit_tests
+  redis:
+    image: redis
+    restart: always
+    container_name: redis

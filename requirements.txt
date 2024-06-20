@@ -2,6 +2,7 @@ gunicorn==22.0.0
 Flask==2.0.3
 Flask-JWT-Extended==4.6.0
 pytest==8.2.2
+redis==5.0.6
 requests==2.32.3
 
 # dependecies

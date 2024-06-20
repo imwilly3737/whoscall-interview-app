@@ -5,6 +5,20 @@ import pytest
 from model.tasks import Tasks
 
 
+class MockedTasks(Tasks):
+
+    def __init__(self):
+        super().__init__()
+        self._storage = {}
+        self._auto_increment = 1
+
+    def get_auto_increment(self):
+        return self._auto_increment
+
+    def increase_auto_increment(self):
+        self._auto_increment += 1
+
+
 def check_query_result(result: list, expect_result: dict):
     assert len(expect_result) == len(result)
     for _r in result:
@@ -13,7 +27,7 @@ def check_query_result(result: list, expect_result: dict):
 
 @pytest.fixture()
 def prepare_empty_task():
-    return Tasks()
+    return MockedTasks()
 
 
 _ONE_TASK_STORAGE = {
@@ -27,9 +41,9 @@ _ONE_TASK_STORAGE = {
 
 @pytest.fixture()
 def prepare_one_task():
-    _tasks = Tasks()
+    _tasks = MockedTasks()
     _tasks._storage = copy.deepcopy(_ONE_TASK_STORAGE)
-    _tasks._auto_increment = 2
+    _tasks.increase_auto_increment()
     return _tasks
 
 
