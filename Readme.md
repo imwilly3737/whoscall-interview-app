@@ -26,3 +26,6 @@
 2. Run testing docker containers. `docker compose -f .\docker-compose-test.yaml up`
 3. Before sending any additional requests, run `docker exec whoscall-app-test python ./e2e_tests/e2e_tests_for_task_api.py`
 4. You will see the result of end-to-end test. E.g. `Success!! ...`
+
+# Scalability
+1. Adjust workers in `gunicorn.conf.py` between 1 and (2 * cpu cores) + 1
