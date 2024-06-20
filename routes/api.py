@@ -4,7 +4,7 @@ import logging
 from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
-from app.app import app
+from app.app import app, json_response
 from model.tasks import task_records
 
 
@@ -12,12 +12,14 @@ logger = logging.getLogger(__name__)
 
 
 @app.route("/health_check", endpoint="health_check")
+@json_response
 def health_check():
     return "OK"
 
 
 @app.route("/tasks", endpoint="get_tasks")
 @jwt_required()
+@json_response
 def get_tasks():
     try:
         return jsonify(result=task_records.query())
@@ -28,6 +30,7 @@ def get_tasks():
 
 @app.route("/task", endpoint="add_task", methods=['POST'])
 @jwt_required()
+@json_response
 def add_task():
     try:
         data = request.get_json()
@@ -41,6 +44,7 @@ def add_task():
 
 @app.route("/task/<int:t_id>", endpoint="update_task", methods=['PUT'])
 @jwt_required()
+@json_response
 def update_task(t_id: int):
     try:
         data = request.get_json()
@@ -54,6 +58,7 @@ def update_task(t_id: int):
 
 @app.route("/task/<int:t_id>", endpoint="delete_task", methods=['DELETE'])
 @jwt_required()
+@json_response
 def delete_task(t_id: int):
     try:
         task_records.delete(t_id)

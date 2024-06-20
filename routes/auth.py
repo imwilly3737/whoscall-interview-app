@@ -3,11 +3,12 @@ from http import HTTPStatus
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
 
-from app.app import app
+from app.app import app, json_response
 from model.user import user_records
 
 
 @app.route("/login", endpoint="login", methods=["POST"])
+@json_response
 def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
@@ -20,6 +21,7 @@ def login():
 
 @app.route("/refresh", endpoint="refresh", methods=["POST"])
 @jwt_required(refresh=True)
+@json_response
 def refresh():
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity)
