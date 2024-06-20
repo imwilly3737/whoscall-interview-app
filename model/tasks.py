@@ -1,11 +1,13 @@
 class Tasks:
-    _storage = {}
-    _auto_increment = 1
     VALID_FIELDS = ["id", "name", "status"]
 
     class Status:
         INCOMPLETE = 0
         COMPLETE = 1
+
+    def __init__(self):
+        self._storage = {}
+        self._auto_increment = 1
 
     def query(self) -> list:
         return list(self._storage.values())

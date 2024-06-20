@@ -2,15 +2,19 @@ from os import getenv
 
 
 class User:
-    _storage = {
-        "whoscall": {
-            "username": "whoscall",
-            "password": getenv("USER_PASSWORD"),
-        }
-    }
 
-    @classmethod
-    def query_user(cls, username, password) -> bool:
-        if username in cls._storage and cls._storage[username]["password"] == password:
+    def __init__(self):
+        self._storage = {
+            "whoscall": {
+                "username": "whoscall",
+                "password": getenv("USER_PASSWORD"),
+            }
+        }
+
+    def query_user(self, username, password) -> bool:
+        if username in self._storage and self._storage[username]["password"] == password:
             return True
         return False
+
+
+user_records = User()

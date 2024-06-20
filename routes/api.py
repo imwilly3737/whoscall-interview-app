@@ -17,7 +17,7 @@ def health_check():
 
 
 @app.route("/tasks", endpoint="get_tasks")
-@jwt_required
+@jwt_required()
 def get_tasks():
     try:
         return jsonify(result=task_records.query())
@@ -27,7 +27,7 @@ def get_tasks():
 
 
 @app.route("/task", endpoint="add_task", methods=['POST'])
-@jwt_required
+@jwt_required()
 def add_task():
     try:
         data = request.get_json()
@@ -40,7 +40,7 @@ def add_task():
 
 
 @app.route("/task/<int:t_id>", endpoint="update_task", methods=['PUT'])
-@jwt_required
+@jwt_required()
 def update_task(t_id: int):
     try:
         data = request.get_json()
@@ -53,7 +53,7 @@ def update_task(t_id: int):
 
 
 @app.route("/task/<int:t_id>", endpoint="delete_task", methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_task(t_id: int):
     try:
         task_records.delete(t_id)

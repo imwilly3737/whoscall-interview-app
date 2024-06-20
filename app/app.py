@@ -13,6 +13,5 @@ app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(minutes=30)
 
 app.config["GENERAL_SERVER_ERROR"] = "Unknown Server Error"
 
-# import routes
-import api.api
-import api.auth
+# Routes need to be imported after Flask app was initiated
+import routes

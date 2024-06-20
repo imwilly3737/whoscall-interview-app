@@ -4,14 +4,14 @@ from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
 
 from app.app import app
-from model.user import User
+from model.user import user_records
 
 
 @app.route("/login", endpoint="login", methods=["POST"])
 def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    if not User.query_user(username, password):
+    if not user_records.query_user(username, password):
         return jsonify(error='Invalid username or password'), HTTPStatus.UNAUTHORIZED
     access_token = create_access_token(identity=username)
     refresh_token = create_refresh_token(identity=username)
